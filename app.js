@@ -3,11 +3,11 @@ var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
 var routes = require('./routes/index');
+//var data=require('json/package/Year2015.json');
 
 var app = express();
-
+//app.locals.appdata=data;
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -18,16 +18,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', routes.index);
-app.get('/RequestRate', routes.RequestRate);
-app.get('/DataRate', routes.DataRate);
-app.get('/PackageCount', routes.PackageCount);
-app.get('/Packages_bz2', routes.Packages_bz2);
-app.get('/PackagesRepository', routes.PackagesRepository);
-
-var server=app.listen(8080,'0.0.0.0',function(){
-  console.log('Listening on port 8080 and ip 0.0.0.0');
-});
+app.use('/', routes);
+// app.locals.appdata=data;
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

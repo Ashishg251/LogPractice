@@ -1,36 +1,21 @@
+var express = require('express');
+var router = express.Router();
+var fs=require('fs');
 
-exports.index=function(req,res){
-  res.render('index',{
-    title:'Home',
-  });
-};
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  res.render('index', { title: 'Express' });
+});
 
-exports.RequestRate=function(req,res){
-  res.render('RequestRate',{
-    title:'Request Rate',
-  });
-};
+router.get('/PackageCount', function(req, res, next) {
+  res.render('PackageCount', { title: 'PackageCount' });
+});
 
-exports.DataRate=function(req,res){
-  res.render('DataRate',{
-    title:'Data Rate',
-  });
-};
+router.get('/:param=?', function(req, res, next) {
+  var param = req.params.param;
+  var data = fs.readFileSync('./public/json/package/'+param+'.json');
+  // var processedData = data.toString();
+  res.send(data.toString());
+});
 
-exports.PackageCount=function(req,res){
-  res.render('PackageCount',{
-    title:'Package Count',
-  });
-};
-
-exports.Packages_bz2=function(req,res){
-  res.render('Packages_bz2',{
-    title:'Packages bz2',
-  });
-};
-
-exports.PackagesRepository=function(req,res){
-  res.render('PackagesRepository',{
-    title:'Packages Repository',
-  });
-};
+module.exports = router;

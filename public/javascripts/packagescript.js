@@ -1,7 +1,9 @@
 (function(){
 
   function WriteTable(data) {
+    // console.log(data);
     for (i = 0; i < data.length; i++) {
+      console.log(data[i]);
       WriteRow(data[i]);
     }
     $('#grid-basic').bootgrid();
@@ -22,7 +24,7 @@
     $('#grid-basic').bootgrid("destroy");
     $('#grid-basic tbody').empty();
     $.ajax({
-      url:'json/package/Year2015.json',
+      url:'/Year2015',
       dataType:'json',
       type:'get',
       cache:false,
@@ -48,7 +50,7 @@
     $('#grid-basic').bootgrid("destroy");
     $('#grid-basic tbody').empty();
     $.ajax({
-      url:'json/package/Oct.json',
+      url:'/Oct',
       dataType:'json',
       type:'get',
       cache:false,
@@ -69,7 +71,7 @@
       var id =$ (this).children().attr('id');
 
       $.ajax({
-        url:'json/package/'+id+'.json',
+        url:'/'+id,
         dataType:'json',
         type:'get',
         cache:false,
